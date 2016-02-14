@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp">
+
+    <ImageView
+        android:id="@+id/checkViewImage"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/checkViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="Title"
+        android:textSize="16sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/checkViewCheck"
+        android:layout_toStartOf="@+id/checkViewCheck"/>
+
+    <TextView
+        android:id="@+id/checkViewSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SubTitle"
+        android:textSize="14sp"
+        android:layout_below="@+id/checkViewTitle"
+        android:layout_alignLeft="@+id/checkViewTitle"
+        android:layout_alignStart="@+id/checkViewTitle" />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/checkViewCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+
+</RelativeLayout>
