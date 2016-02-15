@@ -8,11 +8,13 @@ import android.view.ViewGroup;
 
 import com.gustavofao.recyclerutils.Model.CheckItemModel;
 import com.gustavofao.recyclerutils.Model.DividerModel;
+import com.gustavofao.recyclerutils.Model.GroupModel;
 import com.gustavofao.recyclerutils.Model.SwitchItemModel;
 import com.gustavofao.recyclerutils.Model.TwoItemModel;
 import com.gustavofao.recyclerutils.R;
 import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.CheckItemViewHolder;
 import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.DividerViewHolder;
+import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.GroupViewHolder;
 import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.SwitchItemViewHolder;
 import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.TwoItemsViewHolder;
 
@@ -23,6 +25,8 @@ import java.util.List;
  * Propósito: Adapter para recyclerview com os items já adicionados
  */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int TYPE_GROUP = 1000;
 
     private static final int TYPE_CHECK = 999;
     private static final int TYPE_CHECK_SUBTITLED = 998;
@@ -79,6 +83,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 view = layoutInflater.inflate(R.layout.two_line_item, null);
                 holder = new TwoItemsViewHolder(view);
                 break;
+
+            case TYPE_GROUP:
+                view = layoutInflater.inflate(R.layout.group_item, null);
+                holder = new GroupViewHolder(view);
+                break;
         }
 
         return holder;
@@ -86,50 +95,57 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        Object current = data.get(position);
         switch (getItemViewType(position)) {
             case TYPE_CHECK:
             case TYPE_CHECK_SUBTITLED:
                 CheckItemViewHolder civh = (CheckItemViewHolder) holder;
-                civh.setData((CheckItemModel) data.get(position));
+                civh.setData((CheckItemModel) current);
                 break;
 
             case TYPE_SWITCH:
             case TYPE_SWITCH_SUBTITLED:
                 SwitchItemViewHolder sivh = (SwitchItemViewHolder) holder;
-                sivh.setData((SwitchItemModel) data.get(position));
+                sivh.setData((SwitchItemModel) current);
                 break;
 
             case TYPE_DIVIDER:
                 DividerViewHolder dvh = (DividerViewHolder) holder;
-                dvh.setData((DividerModel) data.get(position));
+                dvh.setData((DividerModel) current);
                 break;
 
             case TYPE_TWO_ITEM:
                 TwoItemsViewHolder tivh = (TwoItemsViewHolder) holder;
-                tivh.setData((TwoItemModel) data.get(position));
+                tivh.setData((TwoItemModel) current);
+                break;
+
+            case TYPE_GROUP:
+                GroupViewHolder gvh = (GroupViewHolder) holder;
+                gvh.setData((GroupModel) current);
                 break;
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (data.get(position) instanceof SwitchItemModel) {
-
-            if (((SwitchItemModel) data.get(position)).isUsingSubTitle())
+        Object current = data.get(position);
+        if (current instanceof SwitchItemModel) {
+            if (((SwitchItemModel) current).isUsingSubTitle())
                 return TYPE_SWITCH_SUBTITLED;
             else
                 return TYPE_SWITCH;
+        } else if (current instanceof CheckItemModel) {
 
-        } else if (data.get(position) instanceof CheckItemModel) {
-
-            if (((CheckItemModel) data.get(position)).isUsingSubTitle())
+            if (((CheckItemModel) current).isUsingSubTitle())
                 return TYPE_CHECK_SUBTITLED;
             else
                 return TYPE_CHECK;
 
-        } else if (data.get(position) instanceof TwoItemModel) {
+        } else if (current instanceof TwoItemModel) {
             return TYPE_TWO_ITEM;
-        } else if (data.get(position) instanceof DividerModel) {
+        } else if (current instanceof GroupModel) {
+            return TYPE_GROUP;
+        } else if (current instanceof DividerModel) {
             return TYPE_DIVIDER;
         }
 

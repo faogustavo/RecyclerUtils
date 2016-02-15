@@ -10,8 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.gustavofao.recyclerutils.Interfaces.OnValueChange;
 import com.gustavofao.recyclerutils.Model.CheckItemModel;
 import com.gustavofao.recyclerutils.Model.DividerModel;
+import com.gustavofao.recyclerutils.Model.GroupModel;
 import com.gustavofao.recyclerutils.Model.SwitchItemModel;
 import com.gustavofao.recyclerutils.Model.TwoItemModel;
 import com.gustavofao.recyclerutils.RecyclerView.Adapter.RecyclerAdapter;
@@ -60,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Click wifi", Toast.LENGTH_SHORT).show();
             }
         });
+        switchModel.setOnValueChange(new OnValueChange<Boolean>() {
+            @Override
+            public void onValueChanged(Boolean newValue) {
+                //Code here
+            }
+        });
         data.add(switchModel);
 
         //Switch Model Simple with subtitle
@@ -76,11 +84,23 @@ public class MainActivity extends AppCompatActivity {
         data.add(divRed);
 
         //TwoItemModel
-        TwoItemModel model = new TwoItemModel("This is a title", "And this is a subtitle", R.drawable.ic_account);
+        TwoItemModel model = new TwoItemModel("This is a title", "And this is a subtitle", R.drawable.ic_download);
         data.add(model);
 
         TwoItemModel model2 = new TwoItemModel("Profile Photo", "Change your Google+ profile photo");
         data.add(model2);
+
+        //Group
+        GroupModel groupModel = new GroupModel("GroupSample");
+
+
+        CharSequence url = "http://design.ubuntu.com/wp-content/uploads/ubuntu-logo32.png";
+
+        groupModel.addItem(new TwoItemModel("This is a title", "And this is a subtitle", R.drawable.ic_download));
+        groupModel.addItem(new SwitchItemModel("Receive messages", "Hangouts message"));
+        groupModel.addItem(new CheckItemModel("Allow notifications", url));
+
+        data.add(groupModel);
 
         RecyclerAdapter adapter = new RecyclerAdapter(this, data);
 

@@ -12,15 +12,20 @@ public class TwoItemModel {
 
     private String title;
     private String subTitle;
+    private String imageURL;
 
     private boolean usingImage;
+    private boolean imageFromURL;
 
     private View.OnClickListener onClickListener;
 
     public TwoItemModel(String title, String subTitle) {
         this.title = title;
         this.subTitle = subTitle;
+        this.imageURL = null;
+
         this.usingImage = false;
+        this.imageFromURL = false;
     }
 
     public TwoItemModel(String title, String subTitle, int imageRes) {
@@ -28,6 +33,15 @@ public class TwoItemModel {
         this.title = title;
         this.subTitle = subTitle;
         this.usingImage = true;
+    }
+
+    public TwoItemModel(String title, String subTitle, CharSequence imageURL) {
+        this.title = title;
+        this.subTitle = subTitle;
+        this.imageURL = imageURL.toString();
+
+        this.usingImage = true;
+        this.imageFromURL = true;
     }
 
     public int getImageRes() {
@@ -49,6 +63,20 @@ public class TwoItemModel {
 
     public boolean isUsingImage() {
         return usingImage;
+    }
+
+    public boolean isUsingImageFromURL() {
+        return imageFromURL;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+        this.usingImage = true;
+        this.imageFromURL = true;
     }
 
     public void setUsingImage(boolean usingImage) {

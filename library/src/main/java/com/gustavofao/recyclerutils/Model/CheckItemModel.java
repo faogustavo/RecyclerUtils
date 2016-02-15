@@ -3,7 +3,7 @@ package com.gustavofao.recyclerutils.Model;
 import android.content.SharedPreferences;
 import android.view.View;
 
-import com.gustavofao.recyclerutils.Interfaces.OnCheckValueChange;
+import com.gustavofao.recyclerutils.Interfaces.OnValueChange;
 
 /**
  * Created by Gustavo Fão Valvassori on 13/02/16.
@@ -15,16 +15,18 @@ public class CheckItemModel {
 
     private String title;
     private String subTitle;
+    private String imageURL;
     private String sharedPreferencesKey;
 
     private boolean useImage;
+    private boolean useImageFromURL;
     private boolean useSubTitle;
     private boolean useSharedPreferences;
     private boolean defaultValue;
     private boolean currentValue;
 
     private SharedPreferences preferences;
-    private OnCheckValueChange onCheckValueChange;
+    private OnValueChange<Boolean> onCheckValueChange;
     private View.OnClickListener onClickListener;
 
     public CheckItemModel(String title) {
@@ -32,6 +34,9 @@ public class CheckItemModel {
 
         this.imageRes = -1;
         this.useImage = false;
+
+        this.imageURL = null;
+        this.useImageFromURL = false;
 
         this.subTitle = null;
         this.useSubTitle = false;
@@ -49,6 +54,9 @@ public class CheckItemModel {
         this.imageRes = imageRes;
         this.useImage = true;
 
+        this.imageURL = null;
+        this.useImageFromURL = false;
+
         this.subTitle = null;
         this.useSubTitle = false;
 
@@ -59,11 +67,33 @@ public class CheckItemModel {
         this.currentValue = defaultValue;
     }
 
+    public CheckItemModel(String title, CharSequence imageURL) {
+        this.title = title;
+
+        this.imageRes = -1;
+        this.useImage = true;
+
+        this.imageURL = imageURL.toString();
+        this.useImageFromURL = true;
+
+        this.subTitle = null;
+        this.useSubTitle = false;
+
+        this.sharedPreferencesKey = null;
+        this.useSharedPreferences = false;
+
+        this.defaultValue = false;
+        this.currentValue = this.defaultValue;
+    }
+
     public CheckItemModel(String title, String subtitle) {
         this.title = title;
 
         this.imageRes = -1;
         this.useImage = false;
+
+        this.imageURL = null;
+        this.useImageFromURL = false;
 
         this.subTitle = subtitle;
         this.useSubTitle = true;
@@ -72,7 +102,7 @@ public class CheckItemModel {
         this.useSharedPreferences = false;
 
         this.defaultValue = false;
-        this.currentValue = defaultValue;
+        this.currentValue = this.defaultValue;
     }
 
     public CheckItemModel(String title, String subtitle, int imageRes) {
@@ -81,6 +111,9 @@ public class CheckItemModel {
         this.imageRes = imageRes;
         this.useImage = true;
 
+        this.imageURL = null;
+        this.useImageFromURL = false;
+
         this.subTitle = subtitle;
         this.useSubTitle = true;
 
@@ -88,7 +121,26 @@ public class CheckItemModel {
         this.useSharedPreferences = false;
 
         this.defaultValue = false;
-        this.currentValue = defaultValue;
+        this.currentValue = this.defaultValue;
+    }
+
+    public CheckItemModel(String title, String subtitle, CharSequence imageURL) {
+        this.title = title;
+
+        this.imageRes = -1;
+        this.useImage = true;
+
+        this.imageURL = imageURL.toString();
+        this.useImageFromURL = true;
+
+        this.subTitle = subtitle;
+        this.useSubTitle = true;
+
+        this.sharedPreferencesKey = null;
+        this.useSharedPreferences = false;
+
+        this.defaultValue = false;
+        this.currentValue = this.defaultValue;
     }
 
     public String getTitle() {
@@ -133,11 +185,11 @@ public class CheckItemModel {
         this.currentValue = currentValue;
     }
 
-    public OnCheckValueChange getOnCheckValueChange() {
+    public OnValueChange<Boolean> getOnValueChange() {
         return onCheckValueChange;
     }
 
-    public void setOnCheckValueChange(OnCheckValueChange onCheckValueChange) {
+    public void setOnValueChange(OnValueChange<Boolean> onCheckValueChange) {
         this.onCheckValueChange = onCheckValueChange;
     }
 
@@ -147,6 +199,16 @@ public class CheckItemModel {
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+        this.useImage = true;
+        this.useImageFromURL = true;
     }
 
     public String getSharedPreferencesKey() {
@@ -159,6 +221,10 @@ public class CheckItemModel {
 
     public boolean isUsingImage() {
         return useImage;
+    }
+
+    public boolean isUsingImageFromURL() {
+        return useImageFromURL;
     }
 
     public boolean isUsingSubTitle() {

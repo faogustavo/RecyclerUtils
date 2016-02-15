@@ -1,6 +1,7 @@
 package com.gustavofao.recyclerutils.RecyclerView.ViewHolder;
 
 import android.support.v7.widget.SwitchCompat;
+import android.text.Html;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.gustavofao.recyclerutils.Model.CheckItemModel;
 import com.gustavofao.recyclerutils.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Gustavo Fão Valvassori on 13/02/16.
@@ -52,8 +54,8 @@ public class SwitchItemViewHolder extends BaseViewHolder {
                     if (model.isUsingSharedPreferences())
                         model.applyChanges();
 
-                    if (model.getOnCheckValueChange() != null)
-                        model.getOnCheckValueChange().onCheckValueChanged(model.getCurrentValue());
+                    if (model.getOnValueChange() != null)
+                        model.getOnValueChange().onValueChanged(model.getCurrentValue());
                 }
             }
         });
@@ -67,8 +69,8 @@ public class SwitchItemViewHolder extends BaseViewHolder {
                 if (model.isUsingSharedPreferences())
                     model.applyChanges();
 
-                if (model.getOnCheckValueChange() != null)
-                    model.getOnCheckValueChange().onCheckValueChanged(model.getCurrentValue());
+                if (model.getOnValueChange() != null)
+                    model.getOnValueChange().onValueChanged(model.getCurrentValue());
             }
         });
     }
@@ -76,11 +78,15 @@ public class SwitchItemViewHolder extends BaseViewHolder {
     public void setData(CheckItemModel model) {
         this.model = model;
 
-        this.title.setText(model.getTitle());
+        this.title.setText(Html.fromHtml(model.getTitle()));
         this.switchView.setChecked(model.getCurrentValue());
 
         if (model.isUsingImage()) {
-            this.imageView.setImageResource(model.getImageRes());
+            if (model.isUsingImageFromURL()) {
+                Picasso.with(getContext()).load(model.getImageURL()).into(this.imageView);
+            } else {
+                this.imageView.setImageResource(model.getImageRes());
+            }
             this.imageView.setVisibility(View.VISIBLE);
 
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) this.title.getLayoutParams();
@@ -93,7 +99,7 @@ public class SwitchItemViewHolder extends BaseViewHolder {
         }
 
         if (model.isUsingSubTitle())
-            this.subTitle.setText(model.getSubTitle());
+            this.subTitle.setText(Html.fromHtml(model.getSubTitle()));
     }
 
 }
