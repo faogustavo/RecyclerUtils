@@ -141,8 +141,11 @@ To download images from URL, the lib uses [Picasso Lib from Square](http://squar
 The only difference is that you need to pass the url as CharSequence.
 
 Success:
+
 ![](/screenshots/success.png)
+
 Error:
+
 ![](/screenshots/failure.png)
 
 Example:
