@@ -9,164 +9,69 @@ import com.gustavofao.recyclerutils.Interfaces.OnValueChange;
  * Created by Gustavo Fão Valvassori on 13/02/16.
  * Propósito: Gerenciar os dados do CheckItemViewHolder
  */
-public class CheckItemModel {
+public class CheckItemModel extends BaseModel {
 
-    private int imageRes;
-
-    private String title;
-    private String subTitle;
-    private String imageURL;
     private String sharedPreferencesKey;
-
-    private boolean useImage;
-    private boolean useImageFromURL;
-    private boolean useSubTitle;
     private boolean useSharedPreferences;
+
     private boolean defaultValue;
     private boolean currentValue;
 
     private SharedPreferences preferences;
-    private OnValueChange<Boolean> onCheckValueChange;
-    private View.OnClickListener onClickListener;
+    private OnValueChange<Boolean> onValueChange;
 
     public CheckItemModel(String title) {
-        this.title = title;
+        super(title);
+    }
 
-        this.imageRes = -1;
-        this.useImage = false;
-
-        this.imageURL = null;
-        this.useImageFromURL = false;
-
-        this.subTitle = null;
-        this.useSubTitle = false;
-
-        this.sharedPreferencesKey = null;
-        this.useSharedPreferences = false;
-
-        this.defaultValue = false;
-        this.currentValue = defaultValue;
+    public CheckItemModel(String title, String subTitle) {
+        super(title, subTitle);
     }
 
     public CheckItemModel(String title, int imageRes) {
-        this.title = title;
-
-        this.imageRes = imageRes;
-        this.useImage = true;
-
-        this.imageURL = null;
-        this.useImageFromURL = false;
-
-        this.subTitle = null;
-        this.useSubTitle = false;
-
-        this.sharedPreferencesKey = null;
-        this.useSharedPreferences = false;
-
-        this.defaultValue = false;
-        this.currentValue = defaultValue;
+        super(title, imageRes);
     }
 
     public CheckItemModel(String title, CharSequence imageURL) {
-        this.title = title;
-
-        this.imageRes = -1;
-        this.useImage = true;
-
-        this.imageURL = imageURL.toString();
-        this.useImageFromURL = true;
-
-        this.subTitle = null;
-        this.useSubTitle = false;
-
-        this.sharedPreferencesKey = null;
-        this.useSharedPreferences = false;
-
-        this.defaultValue = false;
-        this.currentValue = this.defaultValue;
+        super(title, imageURL);
     }
 
-    public CheckItemModel(String title, String subtitle) {
-        this.title = title;
-
-        this.imageRes = -1;
-        this.useImage = false;
-
-        this.imageURL = null;
-        this.useImageFromURL = false;
-
-        this.subTitle = subtitle;
-        this.useSubTitle = true;
-
-        this.sharedPreferencesKey = null;
-        this.useSharedPreferences = false;
-
-        this.defaultValue = false;
-        this.currentValue = this.defaultValue;
+    public CheckItemModel(String title, String subTitle, int imageRes) {
+        super(title, subTitle, imageRes);
     }
 
-    public CheckItemModel(String title, String subtitle, int imageRes) {
-        this.title = title;
-
-        this.imageRes = imageRes;
-        this.useImage = true;
-
-        this.imageURL = null;
-        this.useImageFromURL = false;
-
-        this.subTitle = subtitle;
-        this.useSubTitle = true;
-
-        this.sharedPreferencesKey = null;
-        this.useSharedPreferences = false;
-
-        this.defaultValue = false;
-        this.currentValue = this.defaultValue;
+    public CheckItemModel(String title, String subTitle, CharSequence imageURL) {
+        super(title, subTitle, imageURL);
     }
 
-    public CheckItemModel(String title, String subtitle, CharSequence imageURL) {
-        this.title = title;
-
-        this.imageRes = -1;
-        this.useImage = true;
-
-        this.imageURL = imageURL.toString();
-        this.useImageFromURL = true;
-
-        this.subTitle = subtitle;
-        this.useSubTitle = true;
-
-        this.sharedPreferencesKey = null;
-        this.useSharedPreferences = false;
-
-        this.defaultValue = false;
-        this.currentValue = this.defaultValue;
+    public CheckItemModel(String title, boolean defaultValue) {
+        super(title);
+        this.defaultValue = defaultValue;
     }
 
-    public String getTitle() {
-        return title;
+    public CheckItemModel(String title, String subTitle, boolean defaultValue) {
+        super(title, subTitle);
+        this.defaultValue = defaultValue;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public CheckItemModel(String title, int imageRes, boolean defaultValue) {
+        super(title, imageRes);
+        this.defaultValue = defaultValue;
     }
 
-    public int getImageRes() {
-        return imageRes;
+    public CheckItemModel(String title, CharSequence imageURL, boolean defaultValue) {
+        super(title, imageURL);
+        this.defaultValue = defaultValue;
     }
 
-    public void setImageRes(int imageRes) {
-        this.imageRes = imageRes;
-        this.useImage = imageRes > 0;
+    public CheckItemModel(String title, String subTitle, int imageRes, boolean defaultValue) {
+        super(title, subTitle, imageRes);
+        this.defaultValue = defaultValue;
     }
 
-    public String getSubTitle() {
-        return subTitle;
-    }
-
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
-        this.useSubTitle = subTitle != null;
+    public CheckItemModel(String title, String subTitle, CharSequence imageURL, boolean defaultValue) {
+        super(title, subTitle, imageURL);
+        this.defaultValue = defaultValue;
     }
 
     public boolean getDefaultValue() {
@@ -185,50 +90,16 @@ public class CheckItemModel {
         this.currentValue = currentValue;
     }
 
-    public OnValueChange<Boolean> getOnValueChange() {
-        return onCheckValueChange;
-    }
-
-    public void setOnValueChange(OnValueChange<Boolean> onCheckValueChange) {
-        this.onCheckValueChange = onCheckValueChange;
-    }
-
-    public View.OnClickListener getOnClickListener() {
-        return onClickListener;
-    }
-
-    public void setOnClickListener(View.OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-        this.useImage = true;
-        this.useImageFromURL = true;
-    }
-
-    public String getSharedPreferencesKey() {
-        return sharedPreferencesKey;
-    }
-
     public boolean isUsingSharedPreferences() {
         return useSharedPreferences;
     }
 
-    public boolean isUsingImage() {
-        return useImage;
+    public OnValueChange<Boolean> getOnValueChange() {
+        return onValueChange;
     }
 
-    public boolean isUsingImageFromURL() {
-        return useImageFromURL;
-    }
-
-    public boolean isUsingSubTitle() {
-        return useSubTitle;
+    public void setOnValueChange(OnValueChange<Boolean> onValueChange) {
+        this.onValueChange = onValueChange;
     }
 
     public void withSharedPreferences(SharedPreferences preferences, String sharedPreferencesKey) {

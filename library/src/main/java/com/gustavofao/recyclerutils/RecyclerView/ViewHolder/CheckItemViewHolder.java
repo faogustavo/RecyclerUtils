@@ -76,8 +76,8 @@ public class CheckItemViewHolder extends BaseViewHolder {
         this.title.setText(Html.fromHtml(model.getTitle()));
         this.check.setChecked(model.getCurrentValue());
 
-        if (model.isUsingImage()) {
-            if (model.isUsingImageFromURL()) {
+        if (model.hasImage()) {
+            if (model.isImageFromURL()) {
                 Picasso.with(getContext())
                         .load(model.getImageURL())
                         .error(R.drawable.fail_icon)
@@ -95,7 +95,7 @@ public class CheckItemViewHolder extends BaseViewHolder {
             this.title.setLayoutParams(params);
         }
 
-        if (model.isUsingSubTitle())
+        if (model.hasSubtitle())
             this.subTitle.setText(Html.fromHtml(model.getSubTitle()));
     }
 }

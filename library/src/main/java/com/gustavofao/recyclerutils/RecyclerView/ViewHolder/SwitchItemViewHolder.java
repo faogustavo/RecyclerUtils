@@ -81,9 +81,12 @@ public class SwitchItemViewHolder extends BaseViewHolder {
         this.title.setText(Html.fromHtml(model.getTitle()));
         this.switchView.setChecked(model.getCurrentValue());
 
-        if (model.isUsingImage()) {
-            if (model.isUsingImageFromURL()) {
-                Picasso.with(getContext()).load(model.getImageURL()).into(this.imageView);
+        if (model.hasImage()) {
+            if (model.isImageFromURL()) {
+                Picasso.with(getContext())
+                        .load(model.getImageURL())
+                        .error(R.drawable.fail_icon)
+                        .into(this.imageView);
             } else {
                 this.imageView.setImageResource(model.getImageRes());
             }
@@ -98,7 +101,7 @@ public class SwitchItemViewHolder extends BaseViewHolder {
             this.imageView.setVisibility(View.GONE);
         }
 
-        if (model.isUsingSubTitle())
+        if (model.hasSubtitle())
             this.subTitle.setText(Html.fromHtml(model.getSubTitle()));
     }
 

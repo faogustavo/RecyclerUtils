@@ -130,13 +130,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public int getItemViewType(int position) {
         Object current = data.get(position);
         if (current instanceof SwitchItemModel) {
-            if (((SwitchItemModel) current).isUsingSubTitle())
+            if (((SwitchItemModel) current).hasSubtitle())
                 return TYPE_SWITCH_SUBTITLED;
             else
                 return TYPE_SWITCH;
         } else if (current instanceof CheckItemModel) {
 
-            if (((CheckItemModel) current).isUsingSubTitle())
+            if (((CheckItemModel) current).hasSubtitle())
                 return TYPE_CHECK_SUBTITLED;
             else
                 return TYPE_CHECK;

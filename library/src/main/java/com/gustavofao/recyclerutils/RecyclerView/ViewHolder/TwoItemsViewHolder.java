@@ -40,9 +40,12 @@ public class TwoItemsViewHolder extends BaseViewHolder {
         this.title.setText(Html.fromHtml(model.getTitle()));
         this.subtitle.setText(Html.fromHtml(model.getSubTitle()));
 
-        if (model.isUsingImage()) {
-            if (model.isUsingImageFromURL()) {
-                Picasso.with(getContext()).load(model.getImageURL()).into(this.image);
+        if (model.hasImage()) {
+            if (model.isImageFromURL()) {
+                Picasso.with(getContext())
+                        .load(model.getImageURL())
+                        .error(R.drawable.fail_icon)
+                        .into(this.image);
             } else {
                 this.image.setImageResource(model.getImageRes());
             }

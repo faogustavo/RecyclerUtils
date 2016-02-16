@@ -6,7 +6,7 @@ A simple way to implement various types of basic list items.
 Add this dependecy from jCenter:
 
 ``` groovy
-compile 'com.gustavofao:RecyclerUtils:1.0'
+compile 'com.gustavofao:RecyclerUtils:1.0.1'
 ```
 
 ## USAGE
@@ -186,6 +186,7 @@ switchModel.setOnValueChange(new OnValueChange<Boolean>() {
 * Auto-Order data
 * Title items
 * Item with time
+* Items with badge
 
 ## License
     Copyright 2015 Gustavo Fão. All rights reserved.
