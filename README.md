@@ -262,7 +262,6 @@ To change the sizes, change these values on your dimens.xml
 ```
 
 ## TO-DO
-* Add input items
 * G-Mail like items (Letter icons)
 * Secondary action with image
 * Title items
