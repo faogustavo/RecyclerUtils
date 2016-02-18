@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/checkViewImage"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
+        android:layout_width="@dimen/defaultImageSize"
+        android:layout_height="@dimen/defaultImageSize"
         android:layout_centerVertical="true" />
 
     <TextView
@@ -21,7 +21,8 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:text="Title"
-        android:textSize="16sp"
+        android:textSize="@dimen/defaultTitleSize"
+        android:textColor="@color/colorTextList"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -33,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SubTitle"
-        android:textSize="14sp"
+        android:textSize="@dimen/defaultSubtitleSize"
         android:visibility="gone"
         android:layout_below="@+id/checkViewTitle"
         android:layout_alignParentLeft="true"

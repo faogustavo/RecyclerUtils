@@ -6,15 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gustavofao.recyclerutils.Model.BadgeItemModel;
 import com.gustavofao.recyclerutils.Model.CheckItemModel;
 import com.gustavofao.recyclerutils.Model.DividerModel;
+import com.gustavofao.recyclerutils.Model.FormModel;
 import com.gustavofao.recyclerutils.Model.GroupModel;
+import com.gustavofao.recyclerutils.Model.InputFieldModel;
 import com.gustavofao.recyclerutils.Model.SwitchItemModel;
 import com.gustavofao.recyclerutils.Model.TwoItemModel;
 import com.gustavofao.recyclerutils.R;
+import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.BadgeItemViewHolder;
 import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.CheckItemViewHolder;
 import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.DividerViewHolder;
+import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.FormViewHolder;
 import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.GroupViewHolder;
+import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.InputViewHolder;
 import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.SwitchItemViewHolder;
 import com.gustavofao.recyclerutils.RecyclerView.ViewHolder.TwoItemsViewHolder;
 
@@ -35,6 +41,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int TYPE_SWITCH_SUBTITLED = 996;
 
     private static final int TYPE_TWO_ITEM = 995;
+
+    private static final int TYPE_BADGE = 994;
+    private static final int TYPE_BADGE_SUBTITLED = 993;
+
+    private static final int TYPE_FORM = 992;
 
     private static final int TYPE_DIVIDER = 990;
 
@@ -88,6 +99,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 view = layoutInflater.inflate(R.layout.group_item, null);
                 holder = new GroupViewHolder(view);
                 break;
+
+            case TYPE_BADGE:
+                view = layoutInflater.inflate(R.layout.badge_item, null);
+                holder = new BadgeItemViewHolder(view);
+                break;
+
+            case TYPE_BADGE_SUBTITLED:
+                view = layoutInflater.inflate(R.layout.badge_item_subtitled, null);
+                holder = new BadgeItemViewHolder(view);
+                break;
+
+            case TYPE_FORM:
+                view = layoutInflater.inflate(R.layout.form_item, null);
+                holder = new FormViewHolder(view);
+                break;
         }
 
         return holder;
@@ -109,6 +135,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 sivh.setData((SwitchItemModel) current);
                 break;
 
+            case TYPE_BADGE:
+            case TYPE_BADGE_SUBTITLED:
+                BadgeItemViewHolder bivh = (BadgeItemViewHolder) holder;
+                bivh.setData((BadgeItemModel) current);
+                break;
+
             case TYPE_DIVIDER:
                 DividerViewHolder dvh = (DividerViewHolder) holder;
                 dvh.setData((DividerModel) current);
@@ -122,6 +154,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case TYPE_GROUP:
                 GroupViewHolder gvh = (GroupViewHolder) holder;
                 gvh.setData((GroupModel) current);
+                break;
+
+            case TYPE_FORM:
+                FormViewHolder ivh = (FormViewHolder) holder;
+                ivh.setData((FormModel) current, ((FormModel) current).getData());
                 break;
         }
     }
@@ -141,12 +178,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             else
                 return TYPE_CHECK;
 
+        } else if (current instanceof BadgeItemModel) {
+
+            if (((BadgeItemModel) current).hasSubtitle())
+                return TYPE_BADGE_SUBTITLED;
+            else
+                return TYPE_BADGE;
+
         } else if (current instanceof TwoItemModel) {
             return TYPE_TWO_ITEM;
         } else if (current instanceof GroupModel) {
             return TYPE_GROUP;
         } else if (current instanceof DividerModel) {
             return TYPE_DIVIDER;
+        } else if (current instanceof FormModel) {
+            return TYPE_FORM;
         }
 
         return super.getItemViewType(position);
@@ -157,4 +203,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return data.size();
     }
 
+    public List<Object> getData() {
+        return data;
+    }
 }

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="divider_default">#7F7F7F7F</color>
+
+    <color name="colorTextList">#777</color>
+    <color name="colorGroupTitle">#777</color>
+
+    <color name="colorFormTitle">#777</color>
+    <color name="colorFormButton">#000</color>
+    <color name="colorFormButtonText">#fff</color>
+    <color name="colorFormInputTextColor">#000</color>
 </resources>

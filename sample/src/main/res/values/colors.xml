@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- DEFAULT THEME COLORS, USED FOR SWITCH/CHECK, INPUT FOCUS -->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FF5722</color>
+
+    <!-- DIVIDER DEFAULT COLOR -->
+    <color name="divider_default">#7F7F7F7F</color>
+
+    <!-- COLOR FOR TEXTVIEWS -->
+    <color name="colorTextList">#000</color>
+
+    <!-- COLOR FOR GROUP TITLE -->
+    <color name="colorGroupTitle">#3F51B5</color>
+
+    <!-- FORM COLORS -->
+    <color name="colorFormTitle">#303F9F</color>
+    <color name="colorFormButton">#FF5722</color>
+    <color name="colorFormButtonText">#fff</color>
+    <color name="colorFormInputTextColor">#777</color>
 </resources>

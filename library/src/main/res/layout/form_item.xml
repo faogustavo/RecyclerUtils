@@ -11,29 +11,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="2dp">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <TextView
-                android:id="@+id/group_title"
+                android:id="@+id/form_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Title"
-                android:textSize="@dimen/defaultGroupTitleSize"
-                android:textColor="@color/colorGroupTitle"
+                android:textSize="@dimen/defaultFormTitleSize"
                 android:textStyle="bold"
+                android:textColor="@color/colorFormTitle"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"/>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/group_items"
+                android:id="@+id/form_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/group_title"
-                android:layout_marginTop="32dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp" />
-        </RelativeLayout>
+            <android.support.v7.widget.AppCompatButton
+                android:theme="@style/FormButton"
+                android:id="@+id/form_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"/>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 </RelativeLayout>
